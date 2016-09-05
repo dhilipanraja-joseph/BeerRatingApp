@@ -1,41 +1,44 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
 //import UserStore from '../stores/UserStore'
-import UserWelcome from './UserWelcome'
-import UserActions from '../actions/UserActions'
+// import UserWelcome from './UserWelcome'
+import { getProfile , logout } from '../actions/UserActions'
 
-export default class Navbar extends Component {
-  constructor() {
-    super();
+class Navbar extends Component {
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      //profile: UserStore.get()
-    }
+    // this.state = {
+    //   //profile: UserStore.get()
+    // }
     this._onChange = this._onChange.bind(this);
     this._logout = this._logout.bind(this);
   }
 
   componentDidMount() {
   //  UserStore.startListening(this._onChange);
+    this.props.getProfile();
+
   }
 
-  componentWillUnmount() {
-    //UserStore.stopListening(this._onChange);
-  }
+  // componentWillUnmount() {
+  //   //UserStore.stopListening(this._onChange);
+  // }
 
-  _onChange() {
-    this.setState({
-      //profile: UserStore.get()
-    });
-  }
+   _onChange() {
+  //   this.setState({
+  //     //profile: UserStore.get()
+   this.props.getProfile();
+   }
 
   _logout() {
-    UserActions.logout();
+    logout();
   }
 
   render() {
-    let { profile } = this.state;
-
+    let { username } = this.props;
+    // console.log(this.props);
     return (
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container-fluid">
@@ -51,7 +54,7 @@ export default class Navbar extends Component {
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <UserWelcome profile={profile}/>
+            {/* <UserWelcome profile={username}/> */}
 
             <ul className="nav navbar-nav navbar-right">
               <li><Link to='/'>Home</Link></li>
@@ -65,3 +68,14 @@ export default class Navbar extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => ({
+  username: state.user.username,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getProfile: () => dispatch(getProfile())
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navbar)

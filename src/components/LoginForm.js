@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserActions from '../actions/UserActions'
+import { login } from '../actions/UserActions'
 
 export default class LoginForm extends Component {
   constructor() {
@@ -24,8 +24,8 @@ export default class LoginForm extends Component {
 
   _submit(e) {
     e.preventDefault();
-    
-    UserActions.login(this.state);
+    //console.log("hi");
+    login(this.state);
   }
 
   render() {

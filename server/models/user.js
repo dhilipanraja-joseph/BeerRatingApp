@@ -1,6 +1,6 @@
 // this jwt secret MUST NOT BE COMMITTED!
 // it should be kept as an env variable
-const JWT_SECRET = 'q3w4de5frg6t7hyj8u9ki0u98y7t6r5e';
+const JWT_SECRET = 'q3w4de5frg6t7j8u9ki0u98y7t6r5e';
 
 const bcrypt = require('bcrypt-node');
 const jwt = require('jsonwebtoken');
@@ -8,7 +8,8 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+//  beersratings : [{ type: mongoose.Schema.Types.Ob }]
 });
 
 userSchema.statics.register = function(userObj, cb) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserActions from '../actions/UserActions'
+import { register } from '../actions/UserActions'
 
 export default class RegisterForm extends Component {
   constructor() {
@@ -30,7 +30,7 @@ export default class RegisterForm extends Component {
     if(password1 !== password2) {
       this.setState({
         password1: '',
-        password2: ''        
+        password2: ''
       })
       return alert('Passwords do not match, try again.');
     }
@@ -40,7 +40,7 @@ export default class RegisterForm extends Component {
       password: password1
     };
 
-    UserActions.register(user);
+    register(user);
   }
 
   render() {
