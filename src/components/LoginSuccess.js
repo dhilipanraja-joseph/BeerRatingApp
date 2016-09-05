@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react'
 import { connect } from 'react-redux'
 import { getProfile } from '../actions/UserActions'
-
+import RandomBeer from './RandomBeer'
 
 class LoginSuccess extends Component {
   componentDidMount(){
@@ -10,8 +10,8 @@ class LoginSuccess extends Component {
   render(){
     return (
       <div>
-        Logged in.....
-        <p>Welcome {this.props.username}</p>
+        <h2>Welcome {this.props.username}</h2>
+        <RandomBeer/>
       </div>
     )
   }

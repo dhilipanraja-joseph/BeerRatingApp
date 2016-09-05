@@ -9,6 +9,14 @@ export function receiveProfile(profile) {
   }
 }
 
+export function getBeerinfo(beer) {
+  //console.log("beer");
+  return {
+    type: 'RECEIVE_BEER',
+    beer
+  }
+}
+
 export function removeProfile() {
   return {
     type: 'REMOVE_PROFILE'
@@ -60,12 +68,14 @@ export function getProfile() {
   }
 }
 
-export function getRandomBeer(){
+export function getRandomBeer() {
+  //console.log("beer");
   return dispatch => {
-    axios.get('/api/users/profile')
+    axios.get('/api/beers/randomBeer')
     .then(res => res.data)
-    .then(profile => {
-      dispatch(receiveProfile(profile))
+    .then(beer => {
+      console.log(beer.data);
+      dispatch(getBeerinfo(beer.data))
     })
     .catch(console.error)
   }
